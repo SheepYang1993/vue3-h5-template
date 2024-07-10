@@ -1,7 +1,10 @@
 <script setup lang="ts" name="Demo">
 import { reactive } from "vue";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const contentList = reactive([
+  "✔ ⚡ 打开About2",
+  "✔ ⚡ 打开About3",
   "✔ ⚡ Vue3 + Vite5",
   "✔ 🍕 TypeScript",
   "✔ ✨ Vant4 组件库",
@@ -18,6 +21,13 @@ const contentList = reactive([
   "✔ 首屏加载动画",
   "✔ 开发环境调试面板"
 ]);
+function clickItem(item: string) {
+  if (item == "✔ ⚡ 打开About2") {
+    router.push("/about2");
+  } else if (item == "✔ ⚡ 打开About3") {
+    router.push("/about3");
+  }
+}
 </script>
 
 <template>
@@ -48,7 +58,12 @@ const contentList = reactive([
     </div>
 
     <div class="demo-main">
-      <van-cell v-for="(item, idx) in contentList" :key="idx" :title="item" />
+      <van-cell
+        v-for="(item, idx) in contentList"
+        :key="idx"
+        :title="item"
+        @click="clickItem(item)"
+      />
     </div>
   </div>
 </template>
